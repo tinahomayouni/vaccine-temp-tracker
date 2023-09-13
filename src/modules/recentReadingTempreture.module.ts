@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
-import { RecentReadingTempretureController } from '../controllers/recentReadingTempreture.controller';
-import { RecentReadingTempretureService } from '../services/recentReadingTempreture.service';
+import { DashboardController } from '../controllers/recentReadingTempreture.controller';
+import { RecentReadingTemperatureService } from '../services/recentReadingTempreture.service';
 
 @Module({
-  imports: [],
-  controllers: [RecentReadingTempretureController],
-  providers: [RecentReadingTempretureService],
+  controllers: [DashboardController],
+  providers: [RecentReadingTemperatureService],
 })
-export class recentReadingTempretureModule {}
+export class TemperatureModule {}

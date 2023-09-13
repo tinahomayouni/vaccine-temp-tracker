@@ -1,14 +1,20 @@
 import { Controller, Get } from '@nestjs/common';
-import { RecentReadingTempretureService } from '../services/recentReadingTempreture.service';
+import { RecentReadingTemperatureService } from '../services/recentReadingTempreture.service';
 
-@Controller()
-export class RecentReadingTempretureController {
+@Controller('dashboard')
+export class DashboardController {
   constructor(
-    private readonly recentReadingTempretureService: RecentReadingTempretureService,
+    private readonly recentReadingTemperatureService: RecentReadingTemperatureService,
   ) {}
 
   @Get()
-  getHello(): string {
-    return this.recentReadingTempretureService.getHello();
+  async getDashboardData() {
+    const recentReadings =
+      this.recentReadingTemperatureService.getRecentReadings();
+    // You can also implement logic to fetch alerts here if needed
+    return {
+      recentReadings,
+      alerts: [], // Implement alert logic here
+    };
   }
 }
