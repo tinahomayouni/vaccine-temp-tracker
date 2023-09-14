@@ -1,6 +1,4 @@
-// src/dashboard/dashboard.controller.ts
-
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Render, Res } from '@nestjs/common';
 import { RecentReadingTemperatureService } from '../services/recentReadingTempreture.service';
 
 @Controller('dashboard')
@@ -10,10 +8,11 @@ export class DashboardController {
   ) {}
 
   @Get()
-  @Render('dashboard') // Specify the name of your HTML template (e.g., dashboard.ejs)
-  async getDashboard() {
+  async getDashboard(@Res() res) {
     const recentReadings =
       await this.recentReadingTemperatureService.getRecentReadings();
-    return { recentReadings };
+    const dashboardUrl = '/dashboard'; // Replace with the actual URL
+
+    res.render('dashboard', { dashboard: dashboardUrl, recentReadings });
   }
 }
