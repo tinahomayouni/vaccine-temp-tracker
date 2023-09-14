@@ -1,19 +1,32 @@
+// src/temperature/recentReadingTemperature.service.ts
+
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class RecentReadingTemperatureService {
-  private recentReadings: Array<{ timestamp: Date; temperature: number }> = [];
+  async getRecentReadings(): Promise<
+    { timestamp: Date; temperature: number }[]
+  > {
+    // Generate mock temperature readings for demonstration
+    const readings: { timestamp: Date; temperature: number }[] = [];
 
-  logTemperature(temperature: number) {
-    const timestamp = new Date();
-    this.recentReadings.unshift({ timestamp, temperature });
-    if (this.recentReadings.length > 10) {
-      // Keep the last 10 readings
-      this.recentReadings.pop();
+    // Generate readings for the last 24 hours
+    const twentyFourHoursAgo = new Date();
+    twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+
+    for (let i = 0; i < 100; i++) {
+      const timestamp = new Date(
+        twentyFourHoursAgo.getTime() + i * 3600000, // One reading per hour
+      );
+      const temperature = Math.random() * 10 + 5; // Random temperature between 5°C and 15°C
+      readings.push({ timestamp, temperature });
     }
-  }
 
-  getRecentReadings(limit: number = 5) {
-    return this.recentReadings.slice(0, limit);
+    // Filter readings outside the normal range (below 2°C or above 8°C)
+    const alerts = readings.filter(
+      (reading) => reading.temperature < 2 || reading.temperature > 8,
+    );
+
+    return alerts;
   }
 }
