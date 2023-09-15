@@ -91,7 +91,7 @@
             </div>
         </div>
     </nav>
-    <form action="/logTemperaturePage/submit" method="post">
+    <form action="/logTempreturePage/submit" method="post">
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div>
                 <label for="vaccineTemperature"
@@ -109,11 +109,16 @@
                 <input type="date" id="vaccine-temperature"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Vaccine Temperature" required>
-                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oh, snapp!</span> Some
-                    error message.</p>
-                <p class="mt-2 text-sm text-green-600 dark:text-green-500"><span class="font-medium">Well done!</span>
-                    Some success message.</p>
-
+                <!-- Add a section for success and error messages -->
+                <div class="mt-2 text-sm text-green-600 dark:text-green-500" id="success-message"
+                    style="<%= success ? '' : 'display: none;' %>">
+                    <span class="font-medium">Well done!</span> Form submitted successfully.
+                </div>
+                
+                <div class="mt-2 text-sm text-red-600 dark:text-red-500" id="error-message"
+                    style="<%= !success ? '' : 'display: none;' %>">
+                    <span class="font-medium">Oh, snap!</span> An error occurred during form submission.
+                </div>
             </div>
         </div>
         <button type="submit"
@@ -127,7 +132,20 @@
                     href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.</span>
         </div>
     </footer>
+<script>
+    // JavaScript to show/hide success and error messages based on query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get('success');
+    const error = urlParams.get('error');
 
+    if (success) {
+        document.getElementById('success-message').style.display = 'block';
+    }
+
+    if (error) {
+        document.getElementById('error-message').style.display = 'block';
+    }
+</script>
 
 </body>
 
