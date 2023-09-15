@@ -15,6 +15,7 @@ export class LogTempreturePageService {
     console.log('Service: Saving temperature data');
 
     const temperature = new Temperature();
+
     temperature.value = value;
 
     // Convert the Date object to a formatted string (e.g., ISO string)

@@ -21,9 +21,12 @@ export class LogTempreturePageController {
     @Body('vaccineTemperature') value: number,
     @Res() res: Response,
   ) {
+    console.log('Controller: Received POST request');
+
     try {
       // Save the temperature data using your service
       await this.logTempreturePageService.saveTemperature(value);
+      console.log('Controller: Temperature data saved successfully');
 
       // Redirect to the success page with a query parameter
       res.redirect('/logTempreturePage?success=true');
