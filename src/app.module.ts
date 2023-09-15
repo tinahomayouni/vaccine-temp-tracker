@@ -6,8 +6,14 @@ import { AppService } from './app.service';
 import { DashboardModule } from './modules/dashboard.module';
 import { LogTempreturePageModule } from './modules/logTemperaturePage.module';
 import { ViewLogsPageModule } from './modules/viewLogsPage.module';
+import { DatabaseModule } from 'src/database/database.module';
 @Module({
-  imports: [DashboardModule, LogTempreturePageModule, ViewLogsPageModule],
+  imports: [
+    DashboardModule,
+    LogTempreturePageModule,
+    ViewLogsPageModule,
+    DatabaseModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
