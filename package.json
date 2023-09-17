@@ -1,8 +1,8 @@
 {
   "name": "vaccine-temp-tracker",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "An application for a pharmaceutical company to log and monitor the temperature of storage facilities ensuring vaccines are stored at the correct temperature.",
+  "author": "Tina Homayouni",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
