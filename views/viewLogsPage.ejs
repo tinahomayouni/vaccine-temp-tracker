@@ -91,7 +91,6 @@
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <!-- Existing table content -->
     </table>
-    <hr>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <!-- Existing table content -->
     </table>
@@ -110,6 +109,9 @@
                 <th scope="col" class="px-6 py-3">
                     Timestamp
                 </th>
+                <th scope="col" class="px-6 py-3">
+                    Alerts Section
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -123,6 +125,13 @@
                     </td>
                     <td class="px-6 py-4">
                         <%= temperature.timestamp %>
+                    </td>
+                    <td class="px-6 py-4">
+                        <% if (temperature.value < 2 || temperature.value> 8) { %>
+                            <span class="text-red-500">Alert</span>
+                            <% } else { %>
+                                <span class="text-green-500">Normal</span>
+                                <% } %>
                     </td>
                 </tr>
                 <% }); %>
