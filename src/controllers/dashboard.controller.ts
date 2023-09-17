@@ -1,19 +1,20 @@
-// src/dashboard/dashboard.controller.ts
-
 import { Controller, Get, Render } from '@nestjs/common';
-import { RecentReadingTemperatureService } from '../services/recentReadingTempreture.service';
+import { Temperature } from '../entities/tempreture.entity'; // Adjust the path as needed
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Controller('dashboard')
 export class DashboardController {
   constructor(
-    private readonly recentReadingTemperatureService: RecentReadingTemperatureService,
+    @InjectRepository(Temperature) // Inject the Temperature repository
+    private readonly temperatureRepository: Repository<Temperature>,
   ) {}
 
   @Get()
-  @Render('dashboard') // Specify the name of your HTML template (e.g., dashboard.ejs)
+  @Render('dashboard')
   async getDashboard() {
-    const recentReadings =
-      await this.recentReadingTemperatureService.getRecentReadings();
-    return { recentReadings };
+    const temperatures = await this.temperatureRepository.find();
+    console.log('show 5 records in temperature table ');
+    return { temperatures };
   }
 }

@@ -91,98 +91,49 @@
             </div>
         </div>
     </nav>
-<ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
-    <li class="pb-3 sm:pb-4">
-        <div class="flex items-center space-x-4">
-            <div class="flex-shrink-0">
-                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image">
-            </div>
-            <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    Neil Sims
-                </p>
-                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                    email@flowbite.com
-                </p>
-            </div>
-            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                $320
-            </div>
-        </div>
-    </li>
-    <li class="py-3 sm:py-4">
-        <div class="flex items-center space-x-4">
-            <div class="flex-shrink-0">
-                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="Neil image">
-            </div>
-            <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    Bonnie Green
-                </p>
-                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                    email@flowbite.com
-                </p>
-            </div>
-            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                $3467
-            </div>
-        </div>
-    </li>
-    <li class="py-3 sm:py-4">
-        <div class="flex items-center space-x-4">
-            <div class="flex-shrink-0">
-                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-2.jpg" alt="Neil image">
-            </div>
-            <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    Michael Gough
-                </p>
-                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                    email@flowbite.com
-                </p>
-            </div>
-            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                $67
-            </div>
-        </div>
-    </li>
-    <li class="py-3 sm:py-4">
-        <div class="flex items-center space-x-4">
-            <div class="flex-shrink-0">
-                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="Neil image">
-            </div>
-            <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    Thomas Lean
-                </p>
-                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                    email@flowbite.com
-                </p>
-            </div>
-            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                $2367
-            </div>
-        </div>
-    </li>
-    <li class="pt-3 pb-0 sm:pt-4">
-        <div class="flex items-center space-x-4">
-            <div class="flex-shrink-0">
-                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-4.jpg" alt="Neil image">
-            </div>
-            <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    Lana Byrd
-                </p>
-                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                    email@flowbite.com
-                </p>
-            </div>
-            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                $367
-            </div>
-        </div>
-    </li>
-</ul>
+<div class="relative overflow-x-auto shadow-md">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <!-- Existing table content -->
+    </table>
+    <hr>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <!-- Existing table content -->
+    </table>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+            Temperature Records
+        </caption>
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    ID
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Value
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Timestamp
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% temperatures.forEach(temperature=> { %>
+                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <%= temperature.id %>
+                    </td>
+                    <td class="px-6 py-4">
+                        <%= temperature.value %>
+                    </td>
+                    <td class="px-6 py-4">
+                        <%= temperature.timestamp %>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</div>
+
 
     <footer class="bg-white  shadow dark:bg-gray-900 ">
         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">

@@ -1,15 +1,20 @@
-// src/controllers/viewLogsPage.controller.ts
 import { Controller, Get, Render } from '@nestjs/common';
-import { ViewLogsPageService } from '../services/viewLogsPage.service';
+import { Temperature } from '../entities/tempreture.entity'; // Adjust the path as needed
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Controller('viewLogsPage')
-export class viewLogsPageController {
-  constructor(private readonly viewLogsPageService: ViewLogsPageService) {}
+export class ViewLogsPageController {
+  constructor(
+    @InjectRepository(Temperature) // Inject the Temperature repository
+    private readonly temperatureRepository: Repository<Temperature>,
+  ) {}
 
   @Get()
-  @Render('viewLogsPage') // Specify the name of your EJS template (e.g., viewLogsPage.ejs)
-  async getviewLogsPage() {
-    const message = this.viewLogsPageService.getMessage();
-    return { message };
+  @Render('viewLogsPage')
+  async viewTemperatures() {
+    const temperatures = await this.temperatureRepository.find();
+    console.log('show all records in temperature table ');
+    return { temperatures };
   }
 }

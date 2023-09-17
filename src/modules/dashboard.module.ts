@@ -2,10 +2,14 @@
 
 import { Module } from '@nestjs/common';
 import { DashboardController } from '../controllers/dashboard.controller';
-import { RecentReadingTemperatureService } from '../services/recentReadingTempreture.service'; // Import the service
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Temperature } from 'src/entities/tempreture.entity';
 
 @Module({
+  imports: [
+    TypeOrmModule.forFeature([Temperature]), // Import the module with TemperatureRepository
+    // Other modules you need to import
+  ],
   controllers: [DashboardController],
-  providers: [RecentReadingTemperatureService], // Include the service in providers
 })
 export class DashboardModule {}
