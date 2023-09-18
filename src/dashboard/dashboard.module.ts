@@ -3,7 +3,7 @@
 import { Module } from '@nestjs/common';
 import { DashboardController } from './dashboard.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Temperature } from 'src/temperature/entities/tempreture.entity';
+import { Temperature } from 'src/temperature/tempreture.entity';
 
 @Module({
   imports: [

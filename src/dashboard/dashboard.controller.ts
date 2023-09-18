@@ -1,6 +1,6 @@
 import { Controller, Get, Render } from '@nestjs/common';
-import { Temperature } from '../temperature/entities/tempreture.entity'; // Adjust the path as needed
 import { InjectRepository } from '@nestjs/typeorm';
+import { Temperature } from 'src/temperature/tempreture.entity';
 import { Repository } from 'typeorm';
 
 @Controller('dashboard')
