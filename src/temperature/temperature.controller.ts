@@ -1,47 +1,36 @@
 import { Body, Controller, Get, Post, Render } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { LogTempreturePageService } from './temperature.service';
-import { Temperature } from './tempreture.entity';
+import { TemperatureService } from './temperature.service';
 
-@Controller()
+@Controller('temperature')
 export class TemperatureController {
-  constructor(
-    @InjectRepository(Temperature) // Inject the Temperature repository
-    private readonly temperatureRepository: Repository<Temperature>,
-    private readonly logTempreturePageService: LogTempreturePageService,
-  ) {}
+  constructor(private readonly temperatureService: TemperatureService) {}
 
-  @Get('log-temperature-page')
+  @Get('create-form')
   @Render('logTemperaturePage') // Specify the name of your EJS template (e.g., logTempreturePage.ejs)
   async getLogTemperaturePage() {
     return { success: false };
   }
 
-  @Post('log-temperature-page/submit')
+  @Post()
   @Render('logTemperaturePage')
   async saveTemperature(@Body('vaccineTemperature') value: number) {
     console.log('Controller: Received POST request');
 
     try {
       // Save the temperature data using your service
-      await this.logTempreturePageService.saveTemperature(value);
+      await this.temperatureService.saveTemperature(value);
       console.log('Controller: Temperature data saved successfully');
 
-      // Redirect to the success page with a query parameter
-      // res.redirect('/logTempreturePage?success=true');
       return { success: true };
     } catch (error) {
-      // Redirect to the error page with a query parameter
-      return { success: true };
-      // res.redirect('/logTempreturePage?error=true');
+      return { success: false, error: true };
     }
   }
 
-  @Get('view-logs-page')
+  @Get()
   @Render('viewLogsPage')
   async viewTemperatures() {
-    const temperatures = await this.temperatureRepository.find();
+    const temperatures = await this.temperatureService.findAllTemperatures();
     console.log('show all records in temperature table ');
     return { temperatures };
   }

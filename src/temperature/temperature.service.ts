@@ -5,11 +5,15 @@ import { Repository } from 'typeorm';
 import { Temperature } from './tempreture.entity';
 
 @Injectable()
-export class LogTempreturePageService {
+export class TemperatureService {
   constructor(
     @InjectRepository(Temperature)
     private readonly temperatureRepository: Repository<Temperature>,
   ) {}
+
+  async findAllTemperatures() {
+    return await this.temperatureRepository.find();
+  }
 
   async saveTemperature(value: number): Promise<Temperature> {
     console.log('Service: Saving temperature data');

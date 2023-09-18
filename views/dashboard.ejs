@@ -180,8 +180,7 @@
           </tr>
         </thead>
         <tbody>
-          <% const last5Temperatures=temperatures.slice(-5); %> <%
-          last5Temperatures.forEach(temperature=> { %>
+          <% temperatures.forEach(temperature=> { %>
           <tr
             class="<% if (temperature.value < 2 || temperature.value > 8) { %>bg-red-200<% } else { %>bg-white<% } %> border-b dark:bg-gray-900 dark:border-gray-700"
           >
