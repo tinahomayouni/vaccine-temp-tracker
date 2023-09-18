@@ -1,5 +1,5 @@
 import { Controller, Get, Render } from '@nestjs/common';
-import { Temperature } from '../entities/tempreture.entity'; // Adjust the path as needed
+import { Temperature } from '../temperature/entities/tempreture.entity'; // Adjust the path as needed
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 

@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { RecentReadingTemperatureService } from '../services/recentReadingTempreture.service';
+import { RecentReadingTemperatureService } from 'src/temperature/services/recentReadingTempreture.service';
 
 @Controller('dashboard')
 export class DashboardController {

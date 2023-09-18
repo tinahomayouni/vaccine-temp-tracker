@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ViewLogsPageController } from '../controllers/viewLogsPage.controller';
-import { Temperature } from '../entities/tempreture.entity'; // Adjust the path as needed
+import { Temperature } from 'src/temperature/entities/tempreture.entity';
+import { ViewLogsPageController } from 'src/temperature/controllers/viewLogsPage.controller';
 
 @Module({
   imports: [

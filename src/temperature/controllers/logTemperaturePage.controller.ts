@@ -3,7 +3,7 @@ import { Body, Controller, Get, Post, Render, Req, Res } from '@nestjs/common';
 import { LogTempreturePageService } from '../services/logTemperaturePage.service';
 import { Response, Request } from 'express';
 
-@Controller('logTempreturePage')
+@Controller('log-tempreture-page')
 export class LogTempreturePageController {
   constructor(
     private readonly logTempreturePageService: LogTempreturePageService,
