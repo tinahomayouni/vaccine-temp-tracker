@@ -12,7 +12,7 @@ export class TemperatureController {
     return { success: false };
   }
 
-  @Post()
+  @Post('create-form/submit')
   @Render('logTemperaturePage')
   async saveTemperature(@Body('vaccineTemperature') value: number) {
     console.log('Controller: Received POST request');
@@ -28,7 +28,7 @@ export class TemperatureController {
     }
   }
 
-  @Get()
+  @Get('all-logs')
   @Render('viewLogsPage')
   async viewTemperatures() {
     const temperatures = await this.temperatureService.findAllTemperatures();
