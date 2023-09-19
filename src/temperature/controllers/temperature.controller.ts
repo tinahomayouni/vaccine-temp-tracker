@@ -1,5 +1,7 @@
-import { Body, Controller, Get, Post, Render } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Render } from '@nestjs/common';
 import { TemperatureService } from '../services/temperature.service';
+import { TemperatureRequestParams } from 'src/dtos/request/temperature.request.dto';
+import { TemperatureDto } from 'src/dtos/response/temperature.response.dto';
 
 @Controller('temperature')
 export class TemperatureController {
@@ -34,5 +36,15 @@ export class TemperatureController {
     const temperatures = await this.temperatureService.findAllTemperatures();
     console.log('show all records in temperature table ');
     return { temperatures };
+  }
+  @Get('/:type/:temperature')
+  async convertToCelsius(
+    @Param() params: TemperatureRequestParams,
+  ): Promise<TemperatureDto> {
+    const temperature = this.temperatureService.getTemperature(
+      params.type,
+      params.temperature,
+    );
+    return temperature;
   }
 }
