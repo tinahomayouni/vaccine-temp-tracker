@@ -2,7 +2,7 @@
 
 import { Module } from '@nestjs/common';
 import { DashboardController } from './dashboard.controller';
-import { TemperatureModule } from '../temperature/temperature.module';
+import { TemperatureModule } from 'src/temperature/modules/temperature.module';
 import { DashboardService } from './dashboard.service';
 
 @Module({

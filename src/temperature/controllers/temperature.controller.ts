@@ -1,13 +1,17 @@
 import { Body, Controller, Get, Post, Render } from '@nestjs/common';
-import { TemperatureService } from './temperature.service';
+import { TemperatureService } from '../services/temperature.service';
+
 @Controller('temperature')
 export class TemperatureController {
   constructor(private readonly temperatureService: TemperatureService) {}
+
   @Get('create-form')
   @Render('logTemperaturePage') // Specify the name of your EJS template (e.g., logTempreturePage.ejs)
   async getLogTemperaturePage() {
+    console.log('here');
     return { success: false };
   }
+
   @Post()
   @Render('logTemperaturePage')
   async saveTemperature(@Body('vaccineTemperature') value: number) {
@@ -17,14 +21,13 @@ export class TemperatureController {
       // Save the temperature data using your service
       await this.temperatureService.saveTemperature(value);
       console.log('Controller: Temperature data saved successfully');
+
       return { success: true };
     } catch (error) {
-      // Redirect to the error page with a query parameter
-      return { success: true };
-      // res.redirect('/logTempreturePage?error=true');
       return { success: false, error: true };
     }
   }
+
   @Get()
   @Render('viewLogsPage')
   async viewTemperatures() {

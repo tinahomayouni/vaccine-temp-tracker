@@ -1,9 +1,9 @@
 // src/modules/log-temperature-page.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TemperatureService } from './temperature.service';
-import { TemperatureController } from './temprature.controller';
-import { Temperature } from '../entities/tempreture.entity';
+import { TemperatureService } from '../services/temperature.service';
+import { TemperatureController } from '../controllers/temperature.controller';
+import { Temperature } from '../tempreture.entity';
 
 @Module({
   imports: [

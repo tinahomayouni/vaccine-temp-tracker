@@ -1,7 +1,8 @@
-import { Repository } from 'typeorm';
-import { Temperature } from '../entities/tempreture.entity';
-import { InjectRepository } from '@nestjs/typeorm';
+// src/services/log-temperature-page.service.ts
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Temperature } from '../tempreture.entity';
 
 @Injectable()
 export class TemperatureService {
