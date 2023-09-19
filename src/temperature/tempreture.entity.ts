@@ -8,6 +8,6 @@ export class Temperature {
   @Column('decimal')
   value: number;
 
-  @Column('text') // Use 'text' data type for date and time
-  timestamp: string;
+  @Column({ type: 'date', nullable: true })
+  timestamp: Date;
 }

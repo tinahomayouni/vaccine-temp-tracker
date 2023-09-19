@@ -20,8 +20,8 @@ export class TemperatureService {
 
     const temperature = new Temperature();
     temperature.value = value;
-    // Convert the Date object to a formatted string (e.g., ISO string)
-    temperature.timestamp = new Date().toISOString();
+    temperature.timestamp = new Date();
+
     return this.temperatureRepository.save(temperature);
   }
 }
