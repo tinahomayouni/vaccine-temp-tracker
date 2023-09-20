@@ -8,9 +8,6 @@ export class Temperature {
   @Column({ type: 'real', nullable: true })
   celsius: number;
 
-  @Column({ type: 'real', nullable: true })
-  fahrenheit: number;
-
   @Column({ type: 'date', nullable: true })
   timestamp: Date;
 }
