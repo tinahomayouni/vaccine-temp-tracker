@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, Render } from '@nestjs/common';
 import { TemperatureLogService } from '../services/temperature-log.service';
 import { CreateTemperatureLogDTO } from '../dtos/create-temperature-log.request.dto';
-import { TemperatureDto } from '../dtos/temperature.response.dto';
+import { TemperatureLogResponseDto } from '../dtos/temperature.response.dto';
 
 @Controller('temperature')
 export class TemperatureLogController {
@@ -39,7 +39,7 @@ export class TemperatureLogController {
   }
 
   @Get('logs')
-  async getAllLogs(): Promise<TemperatureDto[]> {
+  async getAllLogs(): Promise<TemperatureLogResponseDto[]> {
     return this.temperatureService.findAllTemperatures();
   }
 

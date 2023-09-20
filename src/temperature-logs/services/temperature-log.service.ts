@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateTemperatureLogDTO as CreateTemperatureLogDTO } from '../dtos/create-temperature-log.request.dto';
 import { Temperature } from '../entities/temperature-log.entity';
 import { TemperatureService } from 'src/temperature/services/temperature.service';
-import { TemperatureDto } from '../dtos/temperature.response.dto';
+import { TemperatureLogResponseDto } from '../dtos/temperature.response.dto';
 
 export enum TEMPERATURE_TYPES {
   fahrenheit = 'fahrenheit',
@@ -19,7 +19,7 @@ export class TemperatureLogService {
     private readonly temperatureService: TemperatureService,
   ) {}
 
-  async findAllTemperatures(): Promise<TemperatureDto[]> {
+  async findAllTemperatures(): Promise<TemperatureLogResponseDto[]> {
     const allTemperatures = await this.temperatureRepository.find();
     return allTemperatures.map((temperature) => ({
       ...temperature,
