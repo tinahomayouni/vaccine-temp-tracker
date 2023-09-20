@@ -47,4 +47,18 @@ export class TemperatureController {
     );
     return temperature;
   }
+  // Updated route handling for Celsius and Fahrenheit
+  @Get(':unit') // Route parameter for temperature unit (celsius or fahrenheit)
+  @Render('temperatureList')
+  async getTemperatures(@Param('unit') unit: string) {
+    // Check if the unit is 'celsius' or 'fahrenheit'
+
+    if (unit === 'celsius' || unit === 'fahrenheit') {
+      const temperatures = await this.temperatureService.findAllTemperatures();
+      return { temperatures, unit };
+    } else {
+      // Handle invalid unit here, for example, return an error message
+      return { error: 'Invalid unit specified' };
+    }
+  }
 }
