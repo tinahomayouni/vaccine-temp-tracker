@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { TemperatureService } from 'src/temperature/services/temperature.service';
-import { Temperature } from '../temperature/tempreture.entity';
+import { TemperatureService } from 'src/temperature-logs/services/temperature.service';
+import { Temperature } from 'src/temperature-logs/temperature.entity';
 
 @Injectable()
 export class DashboardService {

@@ -2,11 +2,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Temperature } from '../tempreture.entity';
 import { TemperatureUtilsDao } from '../../dao/temperature-utils.dao';
-import { TemperatureDto } from '../../dtos/response/temperature.response.dto';
+import { TemperatureDto } from 'src/dtos/response/temperature.response.dto';
+import { CreateTemperatureLogDTO as CreateTemperatureLogDTO } from '../dtos/create-temperature-log';
+import { Temperature } from '../temperature.entity';
 
-export enum types {
+export enum TEMPERATURE_TYPES {
   fahrenheit = 'fahrenheit',
   celsius = 'celsius',
 }
@@ -22,30 +23,34 @@ export class TemperatureService {
     return await this.temperatureRepository.find();
   }
 
-  async saveTemperature(value: number): Promise<Temperature> {
+  async saveTemperature(
+    createTempDto: CreateTemperatureLogDTO,
+  ): Promise<Temperature> {
     console.log('Service: Saving temperature data');
 
     const temperature = new Temperature();
-    temperature.celsius = value; // Set the 'celsius' value to the provided 'value'
-    temperature.fahrenheit = await this.convertCelsiusToFahrenheit(value); // Set the 'fahrenheit' value
-    temperature.timestamp = new Date();
+    temperature.celsius = createTempDto.temperature; // Set the 'celsius' value to the provided 'value'
+    temperature.fahrenheit = await this.convertCelsiusToFahrenheit(
+      createTempDto.temperature,
+    );
+    temperature.timestamp = createTempDto.date;
 
     return await this.temperatureRepository.save(temperature);
   }
 
   async getTemperature(
-    type: types,
+    type: TEMPERATURE_TYPES,
     temperature: number,
   ): Promise<TemperatureDto> {
     let celsius: number;
     let fahrenheit: number;
 
     switch (type) {
-      case types.celsius:
+      case TEMPERATURE_TYPES.celsius:
         celsius = temperature;
         fahrenheit = await this.convertCelsiusToFahrenheit(temperature);
         break;
-      case types.fahrenheit:
+      case TEMPERATURE_TYPES.fahrenheit:
         celsius = await this.convertCelsiusToFahrenheit(temperature);
         fahrenheit = temperature;
         break;

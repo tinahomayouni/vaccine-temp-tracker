@@ -1,10 +1,13 @@
 import { IsEnum, IsNumberString } from 'class-validator';
-import { types } from '../../temperature/services/temperature.service';
+import { ApiProperty } from '@nestjs/swagger';
+import { TEMPERATURE_TYPES } from 'src/temperature-logs/services/temperature.service';
 
 export class TemperatureRequestParams {
-  @IsEnum(types)
-  type: types;
+  @ApiProperty({ enum: TEMPERATURE_TYPES })
+  @IsEnum(TEMPERATURE_TYPES)
+  type: TEMPERATURE_TYPES;
 
+  @ApiProperty()
   @IsNumberString()
   temperature: number;
 }

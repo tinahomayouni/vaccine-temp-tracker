@@ -3,8 +3,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TemperatureService } from '../services/temperature.service';
 import { TemperatureController } from '../controllers/temperature.controller';
-import { Temperature } from '../tempreture.entity';
 import { TemperatureUtilsDao } from 'src/dao/temperature-utils.dao';
+import { Temperature } from '../temperature.entity';
 
 @Module({
   imports: [
@@ -14,4 +14,4 @@ import { TemperatureUtilsDao } from 'src/dao/temperature-utils.dao';
   providers: [TemperatureService, TemperatureUtilsDao],
   exports: [TemperatureService],
 })
-export class TemperatureModule {}
+export class TemperatureLogModule {}

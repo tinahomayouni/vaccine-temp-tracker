@@ -12,6 +12,7 @@ export class DashboardController {
     const temperatures = await this.dashboardService.getRecentReadings();
     return { temperatures };
   }
+
   @Get('alarms')
   async getAlarms() {
     const temperatures = await this.dashboardService.getAlarms();
