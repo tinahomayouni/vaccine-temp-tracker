@@ -26,10 +26,11 @@ export class TemperatureService {
     console.log('Service: Saving temperature data');
 
     const temperature = new Temperature();
-    temperature.value = value;
+    temperature.celsius = value; // Set the 'celsius' value to the provided 'value'
+    temperature.fahrenheit = await this.convertCelsiusToFahrenheit(value); // Set the 'fahrenheit' value
     temperature.timestamp = new Date();
 
-    return this.temperatureRepository.save(temperature);
+    return await this.temperatureRepository.save(temperature);
   }
 
   async getTemperature(

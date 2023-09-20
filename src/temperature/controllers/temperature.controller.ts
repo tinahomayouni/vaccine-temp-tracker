@@ -16,7 +16,7 @@ export class TemperatureController {
 
   @Post('create-form/submit')
   @Render('logTemperaturePage')
-  async saveTemperature(@Body('vaccineTemperature') value: number) {
+  async saveTemperature(@Body('vaccineTemperatureCelsius') value: number) {
     console.log('Controller: Received POST request');
 
     try {
