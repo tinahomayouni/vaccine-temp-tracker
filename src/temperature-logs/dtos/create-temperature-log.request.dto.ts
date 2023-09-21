@@ -1,5 +1,6 @@
-import { IsDate, IsEnum, IsNumber } from 'class-validator';
+import { IsDate, IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
 import { TEMPERATURE_TYPES } from '../services/temperature-log.service';
+import { Transform } from 'class-transformer';
 
 export class CreateTemperatureLogDTO {
   @IsEnum(TEMPERATURE_TYPES)
@@ -9,5 +10,7 @@ export class CreateTemperatureLogDTO {
   temperature: number;
 
   @IsDate()
+  @IsNotEmpty()
+  @Transform(({ value }) => value && new Date(value))
   date: Date;
 }
