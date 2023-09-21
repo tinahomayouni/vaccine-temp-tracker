@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Param, Post, Render } from '@nestjs/common';
-import { TemperatureService } from '../services/temperature.service';
-import { TemperatureRequestParams } from 'src/dtos/request/temperature.request.dto';
-import { TemperatureDto } from 'src/dtos/response/temperature.response.dto';
+import { TemperatureLogService } from '../services/temperature-log.service';
+import { CreateTemperatureLogDTO } from '../dtos/create-temperature-log.request.dto';
+import { TemperatureLogResponseDto } from '../dtos/temperature.response.dto';
 
 @Controller('temperature')
-export class TemperatureController {
-  constructor(private readonly temperatureService: TemperatureService) {}
+export class TemperatureLogController {
+  constructor(private readonly temperatureService: TemperatureLogService) {}
 
   @Get('create-form')
   @Render('logTemperaturePage') // Specify the name of your EJS template (e.g., logTempreturePage.ejs)
@@ -16,12 +16,12 @@ export class TemperatureController {
 
   @Post('create-form/submit')
   @Render('logTemperaturePage')
-  async saveTemperature(@Body('vaccineTemperatureCelsius') value: number) {
+  async saveTemperature(@Body() body: CreateTemperatureLogDTO) {
     console.log('Controller: Received POST request');
 
     try {
       // Save the temperature data using your service
-      await this.temperatureService.saveTemperature(value);
+      await this.temperatureService.saveTemperature(body);
       console.log('Controller: Temperature data saved successfully');
 
       return { success: true };
@@ -37,16 +37,12 @@ export class TemperatureController {
     console.log('show all records in temperature table ');
     return { temperatures };
   }
-  @Get('/:type/:temperature')
-  async convertToCelsius(
-    @Param() params: TemperatureRequestParams,
-  ): Promise<TemperatureDto> {
-    const temperature = this.temperatureService.getTemperature(
-      params.type,
-      params.temperature,
-    );
-    return temperature;
+
+  @Get('logs')
+  async getAllLogs(): Promise<TemperatureLogResponseDto[]> {
+    return this.temperatureService.findAllTemperatures();
   }
+
   // Updated route handling for Celsius and Fahrenheit
   @Get(':unit') // Route parameter for temperature unit (celsius or fahrenheit)
   @Render('temperatureList')

@@ -1,51 +1,29 @@
-// src/services/log-temperature-page.service.ts
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Temperature } from '../tempreture.entity';
-import { TemperatureUtilsDao } from '../../dao/temperature-utils.dao';
-import { TemperatureDto } from '../../dtos/response/temperature.response.dto';
+import { TemperatureUtilsDao } from '../dao/temperature-utils.dao';
+import { TemperatureDto } from '../dtos/response/temperature.response.dto';
 
-export enum types {
+export enum TEMPERATURE_TYPES {
   fahrenheit = 'fahrenheit',
   celsius = 'celsius',
 }
+
 @Injectable()
 export class TemperatureService {
-  constructor(
-    @InjectRepository(Temperature)
-    private readonly temperatureRepository: Repository<Temperature>,
-    private readonly temperatureUtilsDao: TemperatureUtilsDao,
-  ) {}
-
-  async findAllTemperatures() {
-    return await this.temperatureRepository.find();
-  }
-
-  async saveTemperature(value: number): Promise<Temperature> {
-    console.log('Service: Saving temperature data');
-
-    const temperature = new Temperature();
-    temperature.celsius = value; // Set the 'celsius' value to the provided 'value'
-    temperature.fahrenheit = await this.convertCelsiusToFahrenheit(value); // Set the 'fahrenheit' value
-    temperature.timestamp = new Date();
-
-    return await this.temperatureRepository.save(temperature);
-  }
+  constructor(private readonly temperatureUtilsDao: TemperatureUtilsDao) {}
 
   async getTemperature(
-    type: types,
+    type: TEMPERATURE_TYPES,
     temperature: number,
   ): Promise<TemperatureDto> {
     let celsius: number;
     let fahrenheit: number;
 
     switch (type) {
-      case types.celsius:
+      case TEMPERATURE_TYPES.celsius:
         celsius = temperature;
         fahrenheit = await this.convertCelsiusToFahrenheit(temperature);
         break;
-      case types.fahrenheit:
+      case TEMPERATURE_TYPES.fahrenheit:
         celsius = await this.convertCelsiusToFahrenheit(temperature);
         fahrenheit = temperature;
         break;
@@ -59,18 +37,16 @@ export class TemperatureService {
     });
   }
 
-  async convertFahrenheitToCelsius(fahrenheit: number): Promise<number> {
+  convertFahrenheitToCelsius(fahrenheit: number): number {
     const celsiusTemp =
-      (fahrenheit - 32) *
-      (await this.temperatureUtilsDao.getTemperatureMultiplier());
+      (fahrenheit - 32) * this.temperatureUtilsDao.getTemperatureMultiplier();
 
     return parseFloat(celsiusTemp.toFixed(2));
   }
 
-  async convertCelsiusToFahrenheit(celcius: number): Promise<number> {
+  convertCelsiusToFahrenheit(celcius: number): number {
     const fahrenheitTemp =
-      celcius / (await this.temperatureUtilsDao.getTemperatureMultiplier()) +
-      32;
+      celcius / this.temperatureUtilsDao.getTemperatureMultiplier() + 32;
 
     return parseFloat(fahrenheitTemp.toFixed(2));
   }

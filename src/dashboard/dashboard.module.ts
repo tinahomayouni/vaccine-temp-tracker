@@ -2,11 +2,11 @@
 
 import { Module } from '@nestjs/common';
 import { DashboardController } from './dashboard.controller';
-import { TemperatureModule } from 'src/temperature/modules/temperature.module';
 import { DashboardService } from './dashboard.service';
+import { TemperatureLogModule } from 'src/temperature-logs/modules/temperature-log.module';
 
 @Module({
-  imports: [TemperatureModule],
+  imports: [TemperatureLogModule],
   controllers: [DashboardController],
   providers: [DashboardService],
 })

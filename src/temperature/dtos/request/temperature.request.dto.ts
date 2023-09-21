@@ -1,9 +1,9 @@
 import { IsEnum, IsNumberString } from 'class-validator';
-import { types } from '../../temperature/services/temperature.service';
+import { TEMPERATURE_TYPES } from 'src/temperature/services/temperature.service';
 
 export class TemperatureRequestParams {
-  @IsEnum(types)
-  type: types;
+  @IsEnum(TEMPERATURE_TYPES)
+  type: TEMPERATURE_TYPES;
 
   @IsNumberString()
   temperature: number;

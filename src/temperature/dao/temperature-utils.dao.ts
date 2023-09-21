@@ -6,7 +6,7 @@ const db = {
 
 @Injectable()
 export class TemperatureUtilsDao {
-  async getTemperatureMultiplier(): Promise<number> {
+  getTemperatureMultiplier(): number {
     return db.multiplier;
   }
 }
