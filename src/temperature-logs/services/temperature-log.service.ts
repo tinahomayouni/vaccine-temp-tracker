@@ -15,18 +15,21 @@ export enum TEMPERATURE_TYPES {
 export class TemperatureLogService {
   constructor(
     @InjectRepository(Temperature)
-    private readonly temperatureRepository: Repository<Temperature>,
+    private readonly temperatureLogRepository: Repository<Temperature>,
     private readonly temperatureService: TemperatureService,
   ) {}
 
   async findAllTemperatures(): Promise<TemperatureLogResponseDto[]> {
-    const allTemperatures = await this.temperatureRepository.find();
-    return allTemperatures.map((temperature) => ({
-      ...temperature,
-      fahrenheit: this.temperatureService.convertCelsiusToFahrenheit(
-        temperature.celsius,
-      ),
-    }));
+    const allTemperatures = await this.temperatureLogRepository.find();
+    return allTemperatures.map(
+      (temperature) =>
+        new TemperatureLogResponseDto({
+          ...temperature,
+          fahrenheit: this.temperatureService.convertCelsiusToFahrenheit(
+            temperature.celsius,
+          ),
+        }),
+    );
   }
 
   async saveTemperature(
@@ -44,6 +47,6 @@ export class TemperatureLogService {
     }
     temperature.timestamp = createTempDto.date;
 
-    return this.temperatureRepository.save(temperature);
+    return this.temperatureLogRepository.save(temperature);
   }
 }

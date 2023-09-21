@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 
 export class TemperatureLogResponseDto {
   id: number;
@@ -7,5 +7,10 @@ export class TemperatureLogResponseDto {
 
   fahrenheit: number;
 
+  @Exclude()
   timestamp: Date;
+
+  constructor(params: TemperatureLogResponseDto) {
+    Object.assign(this, params);
+  }
 }
