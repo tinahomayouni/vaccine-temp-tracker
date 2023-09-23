@@ -1,15 +1,16 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 
 export class TemperatureLogResponseDto {
-  @ApiProperty()
   id: number;
 
-  @ApiProperty()
   celsius: number;
 
-  @ApiProperty()
   fahrenheit: number;
 
-  @ApiProperty()
+  @Exclude()
   timestamp: Date;
+
+  constructor(params: TemperatureLogResponseDto) {
+    Object.assign(this, params);
+  }
 }

@@ -1,18 +1,16 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsEnum, IsNumber, IsOptional } from 'class-validator';
+import { IsDate, IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
 import { TEMPERATURE_TYPES } from '../services/temperature-log.service';
+import { Transform } from 'class-transformer';
 
 export class CreateTemperatureLogDTO {
   @IsEnum(TEMPERATURE_TYPES)
-  @IsOptional()
-  @ApiProperty({ enum: TEMPERATURE_TYPES })
   type?: TEMPERATURE_TYPES = TEMPERATURE_TYPES.celsius;
 
   @IsNumber()
-  @ApiProperty()
   temperature: number;
 
   @IsDate()
-  @ApiProperty()
+  @IsNotEmpty()
+  @Transform(({ value }) => value && new Date(value))
   date: Date;
 }
